@@ -10,3 +10,4 @@ func main() {
 		num--
 	}
 }
+GIT_COMMITTER_DATE="Mon 16 Mar 2020 20:19:19 BST" git commit --amend --no-edit --date "Mon 16 Mar 2020 20:19:19 BST"
