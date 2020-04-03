@@ -2,6 +2,9 @@ package main
 
 import "fmt"
 
+func insertionSort() {
+
+}
 func main() {
 	arr := [10]int{7, 3, 8, 5, 1, 9, 2, 4, 0, 6}
 
