@@ -4,12 +4,9 @@ import "fmt"
 
 func insertionSort(arr [10]int) [10]int {
 	for i := 0; i < len(arr); i++ {
-		fmt.Println(i, arr[i])
 		item1 := arr[i]
 		j := i - 1
-
 		for j >= 0 && item1 < arr[j] {
-
 			arr[j+1] = arr[j]
 			j--
 		}
