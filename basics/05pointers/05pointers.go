@@ -5,5 +5,7 @@ import (
 )
 
 func main() {
-	fmt.Println("HAI")
+	a := 12
+	b := &a         //This is actually a memmory address
+	fmt.Println(*b) //Prints out the memmory address
 }
