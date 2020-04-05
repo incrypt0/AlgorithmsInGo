@@ -7,10 +7,10 @@ func insertionSort(arr [10]int) [10]int {
 		item1 := arr[i]
 		j := i - 1
 		for j >= 0 && item1 < arr[j] {
-			arr[j+1] = arr[j]
+			arr[j+1], arr[j] = arr[j], arr[j+1]
 			j--
 		}
-		arr[j+1] = item1
+
 	}
 	return arr
 }
