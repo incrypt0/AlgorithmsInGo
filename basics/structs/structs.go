@@ -19,6 +19,7 @@ func (c car) kmh() float64 {
 
 func main() {
 	a := car{gasPedal: 12, brakePedal: 1, steeringWheel: 1241, maxSpeed: 150}
+	b := new(car)
 	fmt.Println(a.maxSpeed)
-	fmt.Println(a.kmh())
+	fmt.Println(a.kmh(), b)
 }
