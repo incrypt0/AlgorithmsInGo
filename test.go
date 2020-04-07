@@ -2,12 +2,9 @@ package main
 
 import "fmt"
 
-func foo() *int {
-	x := 2
-	return &x
-}
 func main() {
-	y := '1'
-	x := int(y)
-	fmt.Println(x)
+	var x float64
+	fmt.Scan(&x)
+	a := int(x)
+	fmt.Println(a)
 }
