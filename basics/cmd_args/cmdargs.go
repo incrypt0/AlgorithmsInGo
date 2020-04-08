@@ -7,5 +7,5 @@ import (
 
 func main() {
 	arg1 := os.Args[1]
-	fmt.Println("Hello world")
+	fmt.Println("Hello world", arg1)
 }

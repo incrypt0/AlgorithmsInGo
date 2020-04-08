@@ -1,29 +1,36 @@
 package main
 
 import (
-	"encoding/json"
+	"bufio"
 	"fmt"
+	"os"
 )
 
-type Box struct {
-	Width  int
-	Height int
-	Color  string
-	Open   bool
-}
-
 func main() {
-	// Create an instance of the Box struct.
-	box := Box{
-		Width:  10,
-		Height: 20,
-		Color:  "blue",
-		Open:   false,
-	}
-	// Create JSON from the instance data.
-	// ... Ignore errors.
-	b, _ := json.Marshal(box)
-	// Convert bytes to string.
-	s := string(b)
-	fmt.Println(s)
+	//Taking User Inputs
+	var name string
+	// //Scan method inside fmt
+	// fmt.Println("Hey there, Enter your name ?")
+	// fmt.Scan(&name)
+	// fmt.Println(name)
+
+	// //Scanln
+	// fmt.Println("Hey there, Enter your name ?")
+	// fmt.Scanln(&name)
+	// fmt.Println(name)
+
+	//Using bufio package
+	//ReadLine method
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("Hey there, Enter your Full Name : ")
+	blah, _, _ := reader.ReadLine()
+	fmt.Println(string(blah))
+
+	//Using the ReadString method
+	fmt.Print("Hey there, Enter your Full Name : ")
+	name, _ = reader.ReadString('\n')
+	fmt.Println(name)
+	fmt.Println('a')
+
+	//Scanner in bufio
 }
