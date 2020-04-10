@@ -1,16 +1,37 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
-func main() {
-	arr := [10]int{7, 3, 8, 5, 1, 9, 2, 4, 0, 6}
-	for i := 0; i < 10; i++ {
-		for j := 0; j < 9; j++ {
+func swap(num1 *int, num2 *int) {
+	*num1, *num2 = *num2, *num1
+}
+func BubbleSort(arr []int) {
+	for i := 0; i < len(arr)-1; i++ {
+		for j := 0; j < len(arr)-1; j++ {
 			if arr[j] > arr[j+1] {
-				arr[j], arr[j+1] = arr[j+1], arr[j]
+				swap(&arr[j], &arr[j+1])
 			}
 		}
 	}
 	fmt.Println(arr)
+}
+func main() {
+	var arr []int
+	var a string
+	fmt.Println("Enter the numbers in new line and Enter X when you are finsihed entering the numbers :")
+l1:
+	for i := 0; true; i++ {
+		fmt.Scanf("%v", &a)
 
+		if a == "X" || a == "x" {
+			break l1
+		}
+		numofA, _ := strconv.Atoi(a)
+		arr = append(arr, numofA)
+
+	}
+	BubbleSort(arr)
 }
