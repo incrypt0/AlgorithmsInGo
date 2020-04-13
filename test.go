@@ -5,73 +5,94 @@ import (
 	"strings"
 )
 
-type Animal struct {
-	name  string
-	food  string
-	move  string
-	sound string
+type Animal interface {
+	Eat()
+	Speak()
+	Move()
+	ChangeName(string)
+}
+type cow struct {
+	name string
 }
 
-//methods
-func (ani Animal) Eat() {
-	fmt.Println(ani.food)
+func (c cow) Eat() {
+	fmt.Println("grass")
 }
-func (ani Animal) Move() {
-	fmt.Println(ani.move)
+func (c cow) Move() {
+	fmt.Println("walk")
 }
-func (ani Animal) Speak() {
-	fmt.Println(ani.sound)
+func (c cow) Speak() {
+	fmt.Println("moo")
 }
-func ProcessRes(animalName string, featureName string, animalMap map[string]Animal) {
-	animNameLower := strings.ToLower(animalName)
-	featureNameLower := strings.ToLower(featureName)
-	var ani Animal
-	switch animNameLower {
-	case "cow":
-		ani = animalMap["cow"]
-	case "snake":
-		ani = animalMap["snake"]
-	case "bird":
-		ani = animalMap["snake"]
-	}
-	switch featureNameLower {
-	case "eat":
-		ani.Eat()
-	case "move":
-		ani.Move()
-	case "speak":
-		ani.Speak()
-	}
+func (c cow) ChangeName(name string) {
+	c.name = name
+}
+
+type bird struct {
+	name string
+}
+
+func (c bird) Eat() {
+	fmt.Println("worm")
+}
+func (c bird) Move() {
+	fmt.Println("fly")
+}
+func (c bird) Speak() {
+	fmt.Println("peep")
+}
+func (c bird) ChangeName(name string) {
+	c.name = name
+}
+
+type snake struct {
+	name string
+}
+
+func (c snake) Eat() {
+	fmt.Println("mice")
+}
+func (c snake) Move() {
+	fmt.Println("slither")
+}
+func (c snake) Speak() {
+	fmt.Println("hss")
+}
+func (c snake) ChangeName(name string) {
+	c.name = name
 }
 func main() {
-	var a, b string
+	var a, b, c string
+	animMap := make(map[string]Animal)
+	animTypeMap := map[string]Animal{
+		"cow":   cow{},
+		"snake": snake{},
+		"bird":  bird{},
+	}
 
-	cow := Animal{
-		name:  "cow",
-		food:  "grass",
-		move:  "walk",
-		sound: "moo",
-	}
-	bird := Animal{
-		name:  "bird",
-		food:  "worms",
-		move:  "fly",
-		sound: "peep",
-	}
-	snake := Animal{
-		name:  "snake",
-		food:  "mice",
-		move:  "slither",
-		sound: "hsss",
-	}
-	animalMap := map[string]Animal{
-		"cow":   cow,
-		"bird":  bird,
-		"snake": snake,
-	}
 	for {
 		fmt.Print("> ")
-		fmt.Scanf("%s %s", &a, &b)
-		ProcessRes(a, b, animalMap)
+		fmt.Scanf("%s %s %s", &a, &b, &c)
+		scanned := strings.ToLower(a)
+		if scanned == "newanimal" {
+			anim := animTypeMap[strings.ToLower(c)]
+			anim.ChangeName(b)
+			animMap[strings.ToLower(b)] = anim
+			fmt.Println("Created..!!")
+		}
+
+		if scanned == "query" {
+			item := animMap[strings.ToLower(b)]
+			command := strings.ToLower(c)
+			switch command {
+			case "move":
+				item.Move()
+			case "eat":
+				item.Eat()
+			case "speak":
+				item.Speak()
+			}
+		}
+
 	}
 }
