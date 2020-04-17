@@ -12,5 +12,6 @@ func main() {
 	for a, b := range arr3 {
 		fmt.Println(a, b)
 	}
+	fmt.Println(arr3)
 
 }

@@ -36,7 +36,7 @@ func usingBufioReadString(name string) {
 	reader := bufio.NewReader(os.Stdin)
 
 	fmt.Print("Hey there, Enter your Full Name : ")
-	name, _ = reader.ReadString('\n') // thsi reads upto newline including newline
+	name, _ = reader.ReadString('\n') // this reads upto newline including newline
 	name = strings.Replace(name, "\n", "", -1)
 	fmt.Println(name)
 	// fmt.Println('a')

@@ -1,98 +1,61 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
-type Animal interface {
-	Eat()
-	Speak()
-	Move()
-	ChangeName(string)
-}
-type cow struct {
-	name string
-}
-
-func (c cow) Eat() {
-	fmt.Println("grass")
-}
-func (c cow) Move() {
-	fmt.Println("walk")
-}
-func (c cow) Speak() {
-	fmt.Println("moo")
-}
-func (c cow) ChangeName(name string) {
-	c.name = name
-}
-
-type bird struct {
-	name string
-}
-
-func (c bird) Eat() {
-	fmt.Println("worm")
-}
-func (c bird) Move() {
-	fmt.Println("fly")
-}
-func (c bird) Speak() {
-	fmt.Println("peep")
-}
-func (c bird) ChangeName(name string) {
-	c.name = name
-}
-
-type snake struct {
-	name string
-}
-
-func (c snake) Eat() {
-	fmt.Println("mice")
-}
-func (c snake) Move() {
-	fmt.Println("slither")
-}
-func (c snake) Speak() {
-	fmt.Println("hss")
-}
-func (c snake) ChangeName(name string) {
-	c.name = name
-}
 func main() {
-	var a, b, c string
-	animMap := make(map[string]Animal)
-	animTypeMap := map[string]Animal{
-		"cow":   cow{},
-		"snake": snake{},
-		"bird":  bird{},
+	sli := []int{1, 5, 8, 6, 7, 3, 4, 87, 10}
+	a, b, c, d := split4(sli)
+	fmt.Println(a, b, c, d)
+	Sort(&a)
+	Sort(&b)
+	Sort(&c)
+	Sort(&d)
+	res := merge(merge(a, b), merge(c, d))
+	fmt.Println(res)
+}
+func merge(left, right []int) (result []int) {
+	result = make([]int, len(left)+len(right))
+
+	i := 0
+	for len(left) > 0 && len(right) > 0 {
+		if left[0] < right[0] {
+			result[i] = left[0]
+			left = left[1:]
+		} else {
+			result[i] = right[0]
+			right = right[1:]
+		}
+		i++
 	}
 
-	for {
-		fmt.Print("> ")
-		fmt.Scanf("%s %s %s", &a, &b, &c)
-		scanned := strings.ToLower(a)
-		if scanned == "newanimal" {
-			anim := animTypeMap[strings.ToLower(c)]
-			anim.ChangeName(b)
-			animMap[strings.ToLower(b)] = anim
-			fmt.Println("Created..!!")
-		}
+	for j := 0; j < len(left); j++ {
+		result[i] = left[j]
+		i++
+	}
+	for j := 0; j < len(right); j++ {
+		result[i] = right[j]
+		i++
+	}
 
-		if scanned == "query" {
-			item := animMap[strings.ToLower(b)]
-			command := strings.ToLower(c)
-			switch command {
-			case "move":
-				item.Move()
-			case "eat":
-				item.Eat()
-			case "speak":
-				item.Speak()
+	return result
+}
+func split4(sli []int) ([]int, []int, []int, []int) {
+	len := len(sli)
+	lenPiece := len / 4
+	a, b, c, d := sli[0:lenPiece], sli[lenPiece:2*lenPiece], sli[2*lenPiece:3*lenPiece], sli[3*lenPiece:]
+	return a, b, c, d
+}
+func swap(num1 *int, num2 *int) {
+	*num1, *num2 = *num2, *num1
+}
+func Sort(arrPtr *[]int) {
+	arr := *arrPtr
+	for i := 0; i < len(arr)-1; i++ {
+		for j := 0; j < len(arr)-1; j++ {
+			if arr[j] > arr[j+1] {
+				swap(&arr[j], &arr[j+1])
 			}
 		}
-
 	}
+
 }
