@@ -41,7 +41,7 @@ func countTest5() {
 
 	var wg sync.WaitGroup
 	wg.Add(1) //Adds a goroutine to counter
-	
+
 	go func() {
 		count("Nairobi")
 		wg.Done() //When the goroutine is done just decrement the counter

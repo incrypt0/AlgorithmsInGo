@@ -1,15 +1,34 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
 func main() {
+	var wg sync.WaitGroup
 	sli := []int{1, 5, 8, 6, 7, 3, 4, 87, 10}
 	a, b, c, d := split4(sli)
 	fmt.Println(a, b, c, d)
-	Sort(&a)
-	Sort(&b)
-	Sort(&c)
-	Sort(&d)
+
+	wg.Add(4)
+	go func() {
+		Sort(&a)
+		wg.Done()
+	}()
+	go func() {
+		Sort(&b)
+		wg.Done()
+	}()
+	go func() {
+		Sort(&c)
+		wg.Done()
+	}()
+	go func() {
+		Sort(&d)
+		wg.Done()
+	}()
+	wg.Wait()
 	res := merge(merge(a, b), merge(c, d))
 	fmt.Println(res)
 }
